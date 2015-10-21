@@ -85,11 +85,12 @@ class JunglebeatTest < Minitest::Test
     assert_equal 1, list.counter
   end
 
-  def test_prepend_two_nodes_verify_head_points_to_second_added_node
+  def test_prepend_two_nodes_verify_head_points_to_third_added_node
     list = Junglebeat.new
     list.prepend("first_prepended_node")
     list.prepend("second_prepended_node")
-    assert_equal "second_prepended_node", list.first_node
+    list.prepend("third_prepended_node")
+    assert_equal "third_prepended_node", list.first_node
   end 
 
   def test_pop_one_off_linked_list
@@ -105,7 +106,14 @@ class JunglebeatTest < Minitest::Test
     list = Junglebeat.new
     list.append("first_node")
     list.append("second_node")
-    list.pop(1)
+    assert_equal "second_node", list.pop
+  end 
+
+  def test_pop_count_remaining_nodes
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.pop
     assert_equal 1, list.counter
   end 
 
@@ -119,15 +127,43 @@ class JunglebeatTest < Minitest::Test
     assert_equal 2, list.counter
   end 
 
-  # def test_include?
-  #   skip
-  #   list = Junglebeat.new
-  #   list.append("first_node")
-  #   list.append("second_node")
-  #   list.append("third_node")
-  #   list.append("fourth_node")
-  #   assert list.include? "second_node"
-  # end 
+  def test_assert_include_data_value
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.append("third_node")
+    list.append("fourth_node")
+    assert list.include?("second_node")
+  end 
+
+  def test_refute_include_data_value
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.append("third_node")
+    list.append("fourth_node")
+    refute list.include?("Cotton-headed ninee muggins")
+  end 
+
+  def test_all_with_three_appended_terms
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.append("third_node")
+    assert_equal "first_node second_node third_node", list.all
+  end 
+
+  def test_all_with_three_prepended_terms
+    list = Junglebeat.new
+    list.prepend("first_node")
+    list.prepend("second_node")
+    list.prepend("third_node")
+    assert_equal "third_node second_node first_node", list.all
+  end 
+
+
+
+
 
 
   # def test_insert_new_node_between_first_and_second_existing_nodes
