@@ -1,42 +1,119 @@
-require 'minitest'          # => true
-require 'minitest/autorun'  # => true
-require 'minitest/pride'    # => true
-require './lib/junglebeat'  # ~> LoadError: cannot load such file -- ./lib/junglebeat
-require './lib/node'
+require 'minitest'          
+require 'minitest/autorun' 
+require 'minitest/pride'    
+require_relative '../lib/junglebeat'  
+require_relative '../lib/node'
 
 class JunglebeatTest < Minitest::Test
 
-  def test_can_find_tail
+  def test_if_no_node_equals_nil
     list = Junglebeat.new
-    refute list.tail.data
+    assert_equal nil, list.data
   end
 
-  # def test_prepend_new_head
-  #   node1 = Node.new("beep")
-  #   assert_equal "data", node1.prepend("beep")
-  # end
-  #
-  # def test_prepend_first_node_equals_tail
-  #   node1 = Node.new("beep")
-  #   assert_equal nil, node1
-  # end
+  def test_head_data_equals_nil
+    list = Junglebeat.new
+    assert_equal nil, list.find_head
+  end
 
+
+
+  def test_find_tail_data
+    list = Junglebeat.new
+    list.append("beep")
+    list.append("bop")
+    list.append("BANG-BANG-SKEET-SKEET!")
+    list.append("VANILLA FACE!")
+    assert_equal "VANILLA FACE!", list.find_tail.data
+  end
+
+  def test_find_tail_next_node_equals_nil
+    list = Junglebeat.new
+    list.append("VANILLA FACE!")
+    assert_equal nil, list.find_tail.next_node
+  end
+
+  def test_append_two_nodes_find_new_tail
+    list = Junglebeat.new
+    list.append("first_node")
+    assert_equal "first_node", list.find_tail.data
+  end
+
+  def test_count_one_node
+    list = Junglebeat.new
+    list.append("first_node")
+    assert_equal 1, list.counter
+  end 
+
+  def test_first_node
+    list = Junglebeat.new
+    list.append("first_node")
+    assert_equal ("first_node"), list.first_node
+  end
+
+  def test_count_list_of_two_appended_nodes
+    list = Junglebeat.new
+    list.append("beep")
+    list.append("bop")
+    assert_equal 2, list.counter
+  end
+
+  def test_count_after_appending_two_nodes
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    assert_equal "second_node", list.find_tail.data
+  end 
+
+  def test_append_two_nodes
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    assert_equal "second_node", list.find_tail.data
+  end
+
+  def test_count_list_of_two_appended_nodes
+    list = Junglebeat.new
+    list.append("beep")
+    list.append("bop")
+    assert_equal 2, list.counter
+  end
+
+  def test_prepend_one_node_and_count
+    list = Junglebeat.new
+    list.prepend("first_node")
+    assert_equal 1, list.counter
+  end
+
+  def test_prepend_two_nodes_verify_head_points_to_second_added_node
+    list = Junglebeat.new
+    list.prepend("first_prepended_node")
+    list.prepend("second_prepended_node")
+    assert_equal "second_prepended_node", list.first_node
+  end 
+
+  def test_return_position_of_node
+    skip
+    list = Junglebeat.new
+    list.append("first_node")
+    list.apppend("second_node")
+    list.append("third_node")
+    assert_equal 3, list.
+  end 
+
+
+
+
+
+
+
+  def test_insert_new_node_between_first_and_second_existing_nodes
+    skip 
+    list = Junglebeat.new
+    list.prepend("first_node")
+    list.append("second_node")
+    list.insert(1, "inserted_node")
+    assert_equal "inserted_node", @head.next_node.data
+  end 
 
 end
-
-# >> Run options: --seed 44630
-# >>
-# >> # Running:
-# >>
-# >>
-# >>
-# >> Finished in 0.000633s, 0.0000 runs/s, 0.0000 assertions/s.
-# >>
-# >> 0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
-
-# ~> LoadError
-# ~> cannot load such file -- ./lib/junglebeat
-# ~>
-# ~> /Users/StevePentler/.rvm/rubies/ruby-2.2.1/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-# ~> /Users/StevePentler/.rvm/rubies/ruby-2.2.1/lib/ruby/site_ruby/2.2.0/rubygems/core_ext/kernel_require.rb:54:in `require'
-# ~> /Users/StevePentler/project/2project/test/junglebeat_test.rb:4:in `<main>'

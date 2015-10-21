@@ -4,6 +4,6 @@ class Node
 
   def initialize(data = nil, next_node = nil)
     @data = data
-    @next_node = nil
+    @next_node = next_node
   end
 end
