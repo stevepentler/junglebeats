@@ -1,4 +1,4 @@
-require './lib/node'
+require '../lib/node'
 require 'pry'
 
 class Junglebeat
@@ -29,7 +29,7 @@ class Junglebeat
 
   def find_head
     current = @head
-    current.data = nil 
+    current.data  
   end
 
   def first_node
@@ -46,23 +46,42 @@ class Junglebeat
     @head.next_node = new_node
   end
 
-  def position(data)
-  end 
-
-  def pop(number, data)
-    skip 
-  end 
-
-  def insert(position, data)
-    skip 
-    new_node = Node.new(position, data)
+  def pop(number = 1)
     current = @head
-    until current && (current.counter == (position - 1))
-      binding.pry
+    removed = []
+      number.times do |iterate|
+      until current.next_node.next_node == nil 
       current = current.next_node
-    end 
-    current.next_node = new_node
+      end
+      current.next_node = nil
+      current = @head
+      end
   end 
+
+  # def include?(data) 
+  #   new_node = Node.new("data")
+  #   current = @head
+  #   until current = list.new_node.data
+  #     current = current.next_node
+  #   if "data" == list.new_node.data
+  #     true
+  #   else
+  #     false
+  #   end
+  # end 
+
+
+
+
+  # def insert(position, data)
+  #   skip 
+  #   new_node = Node.new(position, data)
+  #   current = @head
+  #   until current && (current.counter == (position - 1))
+  #     current = current.next_node
+  #   end 
+  #   current.next_node = new_node
+  # end 
 
 
 

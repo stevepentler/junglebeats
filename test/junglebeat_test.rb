@@ -3,6 +3,7 @@ require 'minitest/autorun'
 require 'minitest/pride'    
 require_relative '../lib/junglebeat'  
 require_relative '../lib/node'
+require 'pry'
 
 class JunglebeatTest < Minitest::Test
 
@@ -15,7 +16,6 @@ class JunglebeatTest < Minitest::Test
     list = Junglebeat.new
     assert_equal nil, list.find_head
   end
-
 
 
   def test_find_tail_data
@@ -92,28 +92,60 @@ class JunglebeatTest < Minitest::Test
     assert_equal "second_prepended_node", list.first_node
   end 
 
-  def test_return_position_of_node
-    skip
+  def test_pop_one_off_linked_list
     list = Junglebeat.new
     list.append("first_node")
-    list.apppend("second_node")
-    list.append("third_node")
-    assert_equal 3, list.
-  end 
-
-
-
-
-
-
-
-  def test_insert_new_node_between_first_and_second_existing_nodes
-    skip 
-    list = Junglebeat.new
-    list.prepend("first_node")
     list.append("second_node")
-    list.insert(1, "inserted_node")
-    assert_equal "inserted_node", @head.next_node.data
+    list.append("tail_node")
+    list.pop
+    assert_equal 2, list.counter
   end 
+
+  def test_pop_two_node_linked_list
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.pop(1)
+    assert_equal 1, list.counter
+  end 
+
+  def test_pop_two_off_linked_list
+    list = Junglebeat.new
+    list.append("first_node")
+    list.append("second_node")
+    list.append("third_node")
+    list.append("fourth_node")
+    list.pop(2)
+    assert_equal 2, list.counter
+  end 
+
+  # def test_include?
+  #   skip
+  #   list = Junglebeat.new
+  #   list.append("first_node")
+  #   list.append("second_node")
+  #   list.append("third_node")
+  #   list.append("fourth_node")
+  #   assert list.include? "second_node"
+  # end 
+
+
+  # def test_insert_new_node_between_first_and_second_existing_nodes
+  #   skip 
+  #   list = Junglebeat.new
+  #   list.prepend("first_node")
+  #   list.append("second_node")
+  #   list.insert(1, "inserted_node")
+  #   assert_equal "inserted_node", @head.next_node.data
+  # end 
+
+  # def test_return_position_of_node
+  #   skip
+  #   list = Junglebeat.new
+  #   list.append("first_node")
+  #   list.append("second_node")
+  #   list.append("third_node")
+  #   assert_equal 3, list
+  # end 
 
 end
