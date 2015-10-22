@@ -9,6 +9,53 @@ class Junglebeat
     @head = Node.new(data)
   end
 
+  def data_word_split(data)
+
+  end
+
+  def make_links(data)
+    @head.next_node = current
+    data.split.each do |word|
+      until current.next_node == nil 
+        new_node = Node.new
+        current = new_node
+        current = current.next_node
+      end 
+    end
+  end 
+
+  # def make_links(value)
+  #   current = @head
+  #   .each do |word|
+  #     if current 
+  #       new_node = Node.new(word)
+  #       current.next_node = new_node
+  #     else
+  #       current = Node.new(word)
+  #       @head = current
+  #     end
+      
+  #   end
+
+  # end 
+
+
+  # def make_links(value)
+  #   current = nil
+  #   value.split.each do |word|
+  #     if current
+  #       new_node = Node.new(word)
+  #       current.next_node = new_node
+  #       current = new_node
+  #     else
+  #       current = Node.new(word)
+  #       @head = current
+  #   end
+  # end 
+
+
+
+
   def counter
     count   = 0
     current = @head
@@ -72,11 +119,15 @@ class Junglebeat
   def all
     current = @head
     all_nodes_data = []
-      until current.next_node == nil 
-      current = current.next_node 
+    if current.next_node == nil
       all_nodes_data << current.data
+    else
+      until current.next_node == nil 
+        all_nodes_data << current.data
+        current = current.next_node 
       end 
-    all_nodes_data.join(" ")
+      all_nodes_data.join(" ")
+    end
   end 
 
   def find(position, number_of_elements = 1) #one arg
@@ -101,10 +152,15 @@ class Junglebeat
     temp_holder = current.next_node
     current.next_node = Node.new(data)
     position += 1
-    current.next_node.next_node = temp_h
+    current.next_node.next_node = temp_holder
     return all 
   end 
 
+  def play
+
+    `say -r 500 -v Boing "#{all}"`
+  end 
 
 end
+
 

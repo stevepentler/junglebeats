@@ -17,7 +17,6 @@ class JunglebeatTest < Minitest::Test
     assert_equal nil, list.find_head
   end
 
-
   def test_find_tail_data
     list = Junglebeat.new
     list.append("beep")
@@ -36,7 +35,8 @@ class JunglebeatTest < Minitest::Test
   def test_append_two_nodes_find_new_tail
     list = Junglebeat.new
     list.append("first_node")
-    assert_equal "first_node", list.find_tail.data
+    list.append("second_node")
+    assert_equal "second_node", list.find_tail.data
   end
 
   def test_count_one_node
