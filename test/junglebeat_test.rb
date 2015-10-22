@@ -52,9 +52,7 @@ class JunglebeatTest < Minitest::Test
   end
 
   def test_count_list_of_two_appended_nodes
-    list = Junglebeat.new
-    list.append("beep")
-    list.append("bop")
+    list = Junglebeat.new("beep bop")
     assert_equal 2, list.counter
   end
 
@@ -90,7 +88,7 @@ class JunglebeatTest < Minitest::Test
     list.prepend("first_prepended_node")
     list.prepend("second_prepended_node")
     list.prepend("third_prepended_node")
-    assert_equal "third_prepended_node", list.first_node
+    assert_equal "third_prepended_node", list.head.data
   end 
 
   def test_pop_one_off_linked_list
@@ -133,7 +131,7 @@ class JunglebeatTest < Minitest::Test
     list.append("second_node")
     list.append("third_node")
     list.append("fourth_node")
-    assert list.include?("second_node")
+    assert list.include?("fourth_node")
   end 
 
   def test_refute_include_data_value
@@ -178,7 +176,7 @@ class JunglebeatTest < Minitest::Test
     assert_equal "third_node", list.find(2)
   end
 
-   def test_find_data_after_third_positions
+  def test_find_data_after_third_positions
     list = Junglebeat.new
     list.append("first_node")
     list.append("second_node")
@@ -211,14 +209,13 @@ class JunglebeatTest < Minitest::Test
     assert_equal "fourth_node fifth_node sixth_node", list.find(3, 3)
   end 
 
-
-def test_insert_one_node_after_first_position
+  def test_insert_one_node_after_first_position
     list = Junglebeat.new
     list.append("first_node")
     list.append("third_node")
     list.append("fourth_node")
     assert_equal "first_node inserted_node third_node fourth_node", list.insert(1, "inserted_node")
-end 
+  end 
 
 
 end
