@@ -5,7 +5,7 @@ class Junglebeat
 
   attr_accessor :head, :data
 
-  def initialize(data = nil)
+  def initialize(data)
     @head = Node.new(data)
   end
 
@@ -29,8 +29,8 @@ class Junglebeat
     end 
   end 
 
-  def counter
-    count = 0
+  def count
+    count = 1
     current = @head
       until current.next_node == nil
         current = current.next_node
@@ -122,7 +122,7 @@ class Junglebeat
     current = @head
     position_data = []
     number_of_elements.times do 
-    position.times do 
+    (position - 1).times do 
       current = current.next_node
       end 
     position_data << current.next_node.data
