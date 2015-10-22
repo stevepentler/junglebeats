@@ -79,18 +79,31 @@ class Junglebeat
     all_nodes_data.join(" ")
   end 
 
+  def find(position, number_of_elements = 1) #one arg
+    current = @head
+    position_data = []
+    number_of_elements.times do 
+    position.times do 
+      current = current.next_node
+      end 
+    position_data << current.next_node.data
+    position += 1
+    current = @head
+  end
+  position_data.join(" ")
+  end 
 
-
-  # def insert(position, data)
-  #   skip 
-  #   new_node = Node.new(position, data)
-  #   current = @head
-  #   until current && (current.counter == (position - 1))
-  #     current = current.next_node
-  #   end 
-  #   current.next_node = new_node
-  # end 
-
+  def insert(position, data)
+    current = @head
+    position.times do 
+      current = current.next_node
+      end
+    temp_holder = current.next_node
+    current.next_node = Node.new(data)
+    position += 1
+    current.next_node.next_node = temp_h
+    return all 
+  end 
 
 
 end
